@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Buttons from './Buttons/Buttons';
+import Display from './Display/Display';
+
+const MAX_COUNT = 5
 
 function App() {
+  const [count, setCount] = useState<number>(0)
+
+  function increment() {
+    if (count < MAX_COUNT)
+      setCount(count + 1)
+  }
+
+  function reset() {
+    setCount(0)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Counter-wrapper">
+
+      <Display count={count} maxCount={MAX_COUNT} />
+      <Buttons increment={increment} reset={reset} count={count} maxCount={MAX_COUNT} />
+
     </div>
   );
 }
